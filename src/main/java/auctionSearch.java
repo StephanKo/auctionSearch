@@ -10,6 +10,8 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +40,10 @@ public class auctionSearch {
         WebElement chooseRegion = driver.findElement(By.id("dnn_ctr691_View_aSclassRegionsSelect")); //находим кнопку выбора региона
         chooseRegion.click();// нажимаем кнопку выбора региона
 
-        $("span#ui-id-2").waitUntil(visible);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("iPopUp")));
+
+        driver.switchTo().frame("РТС-тендер > Поиск > Регион закупки");
 
         WebElement selectRegion = driver.findElement(By.linkText("Волгоградская область"));
         selectRegion.click();
